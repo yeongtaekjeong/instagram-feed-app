@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "com.yt",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -35,6 +36,21 @@
         "projectId": "9ef0d556-e55d-45dc-a4f7-4f6d9692cb94"
       }
     },
-    "owner": "jeongyeongtaek"
+    "owner": "jeongyeongtaek",
+    "plugins": [
+      [
+      "expo-build-properties",
+      {
+        "android": {
+          "compileSdkVersion": 34,
+          "targetSdkVersion": 34,
+          "buildToolsVersion": "34.0.0"
+        },
+        "ios": {
+          "deploymentTarget": "15.1"
+        }
+      }
+      ]
+    ]
   }
 }
