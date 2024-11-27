@@ -13,14 +13,14 @@ import data from './data';
 import Constants from 'expo-constants';
 import Article from './Article';
 import React, {useState} from "react";
-import { CameraView } from 'expo-camera';
+import { Camera,CameraView } from 'expo-camera';
 
 const INSTAGRAM_LOGO = "../assets/instagram-feed-images/instagram_logo.png"
 
 export default function Instagram() {
 
   const [showCamera, setShowCamera] = useState(false);
-  const [cameraType, setCameraType] = useState('facing');
+  const [cameraType, setCameraType] = useState('back');
 
   function renderItem({item, index}) {
     if (index === 0) {
@@ -70,8 +70,21 @@ export default function Instagram() {
         showCamera && (
           <CameraView style={styles.camera} facing={cameraType}>
             <View style={styles.cameraContainer}>
-              <TouchableOpacity onPress={() => setShowCamera(false)}>
+              {/* 닫기 버튼 */}
+              <TouchableOpacity style={styles.closeButton}
+                onPress={() => setShowCamera(false)}>
                 <Feather name='x' size={24} color='white' />
+              </TouchableOpacity>
+
+              {/* 화면 전환 버튼 */}
+              <TouchableOpacity style={styles.switchButton} 
+                onPress={() => setCameraType(cameraType === 'back'?'front':'back')}>
+                <Feather name="refresh-ccw" size={24} color="white" />
+              </TouchableOpacity>
+
+              {/* 촬영 버튼 */}
+              <TouchableOpacity style={styles.captureButton} onPress={() => console.log('촬영!')}>
+                <Feather name="circle" size={50} color="white" />
               </TouchableOpacity>
             </View>
 
@@ -114,9 +127,43 @@ const styles = StyleSheet.create({
     backgroundColor: "#fafafa",
   },
   selectedImage: {
-      width: '100%',
-      height: 300,
-      resizeMode: 'cover',
-      marginTop: 10,
+    width: '100%',
+    height: 300,
+    resizeMode: 'cover',
+    marginTop: 10,
+  },
+  camera: {
+    width:'100%',
+    height:'100%'
+  },
+  cameraContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    padding: 20,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 20,
+    padding: 10,
+  },
+  switchButton: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 20,
+    padding: 10,
+  },
+  captureButton: {
+    position: 'absolute',
+    bottom: 40,
+    alignSelf: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    borderRadius: 50,
+    padding: 20,
   },
 });
